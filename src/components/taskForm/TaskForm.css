@@ -1,0 +1,43 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;   
+}
+.form input {
+    margin-right: 10px;
+    height: 36px;
+    width: 80%;
+    border: 1px white solid;
+    background-color: rgb(36, 35, 35);
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.form button {
+    height: 40px;
+    background-color: rgb(29, 171, 228);
+    border: 1px white solid;
+    border-radius: 5px;
+    width: 20%;
+}
+
+.form button:hover {
+    background-color: rgb(41, 42, 46);
+    border: 1px white solid;
+}
+
+.form select {
+    height: 39px;
+    padding-left: 10px;  
+    border-radius: 5px;
+}
+
+.form h2 {
+    text-align: start;
+    padding: 0;
+    margin: 5px 0;
+}

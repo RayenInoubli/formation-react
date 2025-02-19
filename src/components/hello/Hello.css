@@ -1,0 +1,8 @@
+.hello {
+    .intro {
+        color: red;
+        font-size: 200px;
+        padding: 0;
+        margin: -30%;
+    }
+}
