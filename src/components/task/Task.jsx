@@ -19,7 +19,6 @@ function Task(props) {
               >
                 delete
               </span>
-
               <span className="update-btn" onClick={() => setIsUpdate(true)}>
                 update
               </span>

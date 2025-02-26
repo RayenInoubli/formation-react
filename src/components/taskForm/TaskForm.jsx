@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./TaskForm.css";
 
 export default function Form(props) {
@@ -33,6 +33,10 @@ export default function Form(props) {
     setDifficulty("easy");
     setLevel("beginner");
   };
+
+  useEffect(() => {
+    document.title = title;
+  });
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Create a new Task</h2>

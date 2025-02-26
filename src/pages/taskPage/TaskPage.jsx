@@ -1,41 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TaskForm from "../../components/taskForm/TaskForm";
 import "./TaskPage.css";
 import TaskList from "../../components/taskList/TaskList";
+import * as api from "../../services/tasks.service";
 
 export default function TaskPage() {
-  const predefinedTasks = [
-    {
-      title: "Learn Html",
-      details: {
-        duration: 60,
-        difficulty: "easy",
-        level: "beginner",
-      },
-      id: 1,
-    },
-    {
-      title: "Learn Css",
-      details: {
-        duration: 120,
-        difficulty: "medium",
-        level: "intermediate",
-      },
-      id: 2,
-    },
-    {
-      title: "Learn JavaScript",
-      details: {
-        duration: 160,
-        difficulty: "hard",
-        level: "techlead",
-      },
-      id: 3,
-    },
-  ];
 
-  const [tasks, setTasks] = useState(predefinedTasks);
+  const [tasks, setTasks] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const steps = ["Enter the title", "Click on add button"];
 
@@ -58,7 +32,20 @@ export default function TaskPage() {
       )
     );
   };
-
+  
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const result = await api.fetchTasks();
+        setTasks(result);
+      } catch (error) {
+        setError(error);
+      }
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [])
   return (
     <div className="task-page">
       <button className="toggle-visibility" onClick={handleVisibility}>
@@ -81,6 +68,8 @@ export default function TaskPage() {
           handleUpdateTask={handleUpdateTask}
         />
       )}
+      {isLoading && <div>loading....</div>}
+      {error && <div className="error">Fatal Error: {error.message}</div>}
     </div>
   );
 }

@@ -37,3 +37,8 @@ ul {
     left: 1rem;
     top: 1rem;
 }
+
+.error {
+    color: red;
+    font-weight: 800;
+}
