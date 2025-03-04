@@ -1,0 +1,117 @@
+/* TaskDetails.css */
+.task-details-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.task-details-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.task-details-title {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.task-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.task-info-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.task-info-row:hover {
+    background: #e9ecef;
+}
+
+.task-label {
+    font-weight: 600;
+    color: #34495e;
+    min-width: 100px;
+    margin-right: 15px;
+}
+
+.task-value {
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+/* Difficulty colors */
+.difficulty-easy {
+    color: #27ae60;
+    font-weight: 500;
+}
+
+.difficulty-medium {
+    color: #e67e22;
+    font-weight: 500;
+}
+
+.difficulty-hard {
+    color: #c0392b;
+    font-weight: 500;
+}
+
+.difficulty-na {
+    color: #7f8c8d;
+}
+
+/* Loading state */
+.task-details-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.loader {
+    color: #3498db;
+    font-size: 1.2rem;
+}
+
+/* Error state */
+.task-details-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c0392b;
+    padding: 20px;
+    border-radius: 4px;
+    border-left: 5px solid #c0392b;
+}
+
+/* No task state */
+.task-details-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.no-task {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 4px;
+}

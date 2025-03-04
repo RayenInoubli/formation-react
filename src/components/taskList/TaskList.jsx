@@ -9,7 +9,7 @@ function TaskList(props) {
     <div className="tasks-container">
       {tasks.map((task) => (
         <Task
-          key={task.id}
+          key={task._id}
           task={task}
           tasks={tasks}
           handleDeleteTask={handleDeleteTask}

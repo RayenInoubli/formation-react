@@ -5,7 +5,7 @@ export default function Form(props) {
   const { handleAddTask  } = props;
 
   const [title, setTitle] = useState("");
-  const [duration, setDuration] = useState();
+  const [duration, setDuration] = useState(0);
   const [difficulty, setDifficulty] = useState("easy");
   const [level, setLevel] = useState("beginner");
 

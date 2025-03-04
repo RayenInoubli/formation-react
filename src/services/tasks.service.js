@@ -6,7 +6,7 @@ let tasks = [
       difficulty: "easy",
       level: "beginner",
     },
-    id: 1,
+    _id: 1,
   },
   {
     title: "Learn Css",
@@ -15,7 +15,7 @@ let tasks = [
       difficulty: "medium",
       level: "intermediate",
     },
-    id: 2,
+    _id: 2,
   },
   {
     title: "Learn JavaScript",
@@ -24,7 +24,7 @@ let tasks = [
       difficulty: "hard",
       level: "techlead",
     },
-    id: 3,
+    _id: 3,
   },
 ];
 
@@ -33,7 +33,7 @@ function delay(ms) {
 }
 
 export const fetchTasks = async () => {
-  await delay(3000);
+  await delay(1000);
   // throw new Error("No tasks");
   return tasks;
 }

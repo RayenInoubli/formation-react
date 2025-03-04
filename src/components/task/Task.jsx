@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Task.css";
 import UpdateTaskForm from "../updateTaskForm/UpdateTaskForm";
+import {Link, NavLink} from "react-router-dom";
 
 function Task(props) {
   const { task, handleDeleteTask, handleUpdateTask} = props;
@@ -11,7 +12,7 @@ function Task(props) {
       {!isUpdate ? (
         <>
           <div className="task-main">
-            <div className="title">{task.title}</div>
+            <div className="title"><Link to={`/tasks/${task._id}`}>{task.title}</Link></div>
             <div className="actions">
               <span
                 className="delete-btn"

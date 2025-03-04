@@ -5,34 +5,39 @@ import TaskList from "../../components/taskList/TaskList";
 import * as api from "../../services/tasks.service";
 
 export default function TaskPage() {
-
   const [tasks, setTasks] = useState([]);
-  const [isVisible, setIsVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  // const [searchValue, setSearchValue] = useState("");
 
   const steps = ["Enter the title", "Click on add button"];
 
-  const handleVisibility = () => setIsVisible(!isVisible);
-
-  const handleAddTask = (newTask) => {
-    setTasks((task) => [...task, newTask]);
+  const handleAddTask = async (newTask) => {
+    try {
+      setIsLoading(true);
+      const addedTask = await api.addTask(newTask);
+      setTasks((prevTasks) => [...prevTasks, addedTask]);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleDeleteTask = (id) => {
-    setTasks((task) => task.filter((task) => task.id !== id));
+    setTasks((task) => task.filter((task) => task._id !== id));
   };
 
   const handleUpdateTask = (id, title, duration) => {
     setTasks((task) =>
       task.map((task) =>
-        task.id === id
+        task._id === id
           ? { ...task, title, details: { ...task.details, duration } }
           : task
       )
     );
   };
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -45,12 +50,55 @@ export default function TaskPage() {
       setIsLoading(false);
     }
     fetchData();
-  }, [])
+  }, []);
+
+  // 3ème forme de useEffect
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true)
+  //     if (searchValue.length === 0) {
+  //       console.log("tasks empty")
+  //       setTasks([])
+  //       setIsLoading(false);
+  //     } else {
+  //       const result = await api.fetchTasksByFilter(searchValue)
+  //       console.log("tasks form api : " + searchValue)
+  //       setTasks(result)
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   console.log("searchValue", searchValue)
+  //   fetchData()
+  // }, [searchValue])
+
+  // 4ème forme de useEffect
+  // useEffect(() => {
+  //   let didCancel = false
+  //   const fetchData = async () => {
+  //     setIsLoading(true)
+  //     if (!searchValue) {
+  //       setTasks([])
+  //       setIsLoading(false);
+  //     } else {
+  //       const result = await api.fetchTasksByFilter(searchValue)
+  //       if (!didCancel) {
+  //         console.log("result: ", searchValue)
+
+  //         setTasks(result)
+  //         setIsLoading(false);
+  //       }
+  //     }
+  //   }
+  //   fetchData()
+
+  //   return () => {
+  //     console.log("cleanup: ", searchValue)
+  //     didCancel = true
+  //   }
+  // }, [searchValue])
+
   return (
     <div className="task-page">
-      <button className="toggle-visibility" onClick={handleVisibility}>
-        {isVisible ? "Hide" : "Show"}
-      </button>
       <div className="task-side">
         <ul>
           {steps.map((step, index) => (
@@ -61,14 +109,15 @@ export default function TaskPage() {
         </ul>
         <TaskForm tasks={tasks} handleAddTask={handleAddTask} />
       </div>
-      {isVisible && (
-        <TaskList
-          tasks={tasks}
-          handleDeleteTask={handleDeleteTask}
-          handleUpdateTask={handleUpdateTask}
-        />
-      )}
-      {isLoading && <div>loading....</div>}
+       {
+        isLoading ? <div>loading....</div> : (
+          <TaskList
+            tasks={tasks}
+            handleDeleteTask={handleDeleteTask}
+            handleUpdateTask={handleUpdateTask}
+          />
+        )
+       }
       {error && <div className="error">Fatal Error: {error.message}</div>}
     </div>
   );

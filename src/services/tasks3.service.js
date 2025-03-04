@@ -4,6 +4,7 @@ export const header = () => ({
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 })
+
 export const addTask = async (task) => {
   const result = await Axios.post("http://localhost:5000/api/tasks", task)
   return result.data.model
